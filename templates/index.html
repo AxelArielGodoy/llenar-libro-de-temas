@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD con Flask</title>
+</head>
+<body>
+    <h1>Registro de Clases</h1>
+
+    <!-- Formulario para crear un nuevo dato -->
+    <form action="/crear" method="post">
+        <input type="text" name="dia" placeholder="Día" required>
+        
+        <!-- Campo de fecha con valor predeterminado de hoy -->
+        <input type="date" name="fecha" id="fecha" required>
+        
+        <input type="text" name="mes" placeholder="Mes" required>
+        <input type="number" name="unidad_numero" placeholder="Unidad N°" required>
+        <input type="number" name="clase_numero" placeholder="Clase N°" required>
+        
+        <!-- Menú desplegable para Curso -->
+        <select name="curso" required>
+            <option value="6a">6a</option>
+            <option value="5b">5b</option>
+        </select>
+
+        <input type="text" name="caracter_clase" placeholder="Carácter de la clase" required>
+        <input type="text" name="contenidos_tematicos" placeholder="Contenidos Temáticos" required>
+        <input type="text" name="actividades" placeholder="Actividades que se desarrollan" required>
+        <input type="text" name="observaciones" placeholder="Observaciones">
+        <button type="submit">Agregar</button>
+    </form>
+
+    <!-- Tabla para mostrar los datos existentes -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Día</th>
+                <th>Fecha</th>
+                <th>Mes</th>
+                <th>Unidad N°</th>
+                <th>Clase N°</th>
+                <th>Curso</th>
+                <th>Carácter de la Clase</th>
+                <th>Contenidos Temáticos</th>
+                <th>Actividades</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dato in datos %}
+            <tr>
+                <td>{{ dato.id }}</td>
+                <td><input type="text" name="dia" value="{{ dato.dia }}" required></td>
+                <td><input type="date" name="fecha" value="{{ dato.fecha }}" required></td>
+                <td><input type="text" name="mes" value="{{ dato.mes }}" required></td>
+                <td><input type="number" name="unidad_numero" value="{{ dato.unidad_numero }}" required></td>
+                <td><input type="number" name="clase_numero" value="{{ dato.clase_numero }}" required></td>
+                <td>
+                    <!-- Menú desplegable para Curso -->
+                    <select name="curso" required>
+                        <option value="6a" {% if dato.curso == "6a" %}selected{% endif %}>6a</option>
+                        <option value="5b" {% if dato.curso == "5b" %}selected{% endif %}>5b</option>
+                    </select>
+                </td>
+                <td><input type="text" name="caracter_clase" value="{{ dato.caracter_clase }}" required></td>
+                <td><input type="text" name="contenidos_tematicos" value="{{ dato.contenidos_tematicos }}" required></td>
+                <td><input type="text" name="actividades" value="{{ dato.actividades }}" required></td>
+                <td><input type="text" name="observaciones" value="{{ dato.observaciones }}"></td>
+                <td>
+                    <!-- Botón de actualizar -->
+                    <form action="/actualizar/{{ dato.id }}" method="post" style="display: inline-block;">
+                        <button type="submit">Actualizar</button>
+                    </form>
+                    <!-- Botón de eliminar -->
+                    <form action="/eliminar/{{ dato.id }}" method="post" style="display: inline-block;">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón para descargar el archivo Excel -->
+    <button onclick="window.location.href='/descargar_excel'">Descargar Excel</button>
+
+    <!-- Script para establecer la fecha actual por defecto, considerando la zona horaria GMT-3 -->
+    <script>
+        // Obtiene la fecha actual en GMT
+        const today = new Date();
+        // Ajusta la fecha a GMT-3
+        today.setHours(today.getHours() - 3);
+        // Formatea la fecha en formato YYYY-MM-DD
+        const formattedDate = today.toISOString().split('T')[0];
+        // Establece la fecha por defecto en el campo de fecha
+        document.getElementById('fecha').value = formattedDate;
+    </script>
+
+</body>
+</html>
