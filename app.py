@@ -48,28 +48,6 @@ def crear():
     guardar_datos()  # Guarda en el archivo Excel después de agregar
     return redirect(url_for('index'))
 
-# Ruta para actualizar un dato existente
-# @app.route('/actualizar/<int:id>', methods=['POST'])
-# def actualizar(id):
-#     for dato in datos:
-#         if dato['id'] == id:
-
-#             dato.update({
-#                 "dia": request.form['dia'],
-#                 "fecha": request.form['fecha'],
-#                 "mes": request.form['mes'],
-#                 "unidad_numero": request.form['unidad_numero'],
-#                 "clase_numero": request.form['clase_numero'],
-#                 "curso": request.form['curso'],
-#                 "caracter_clase": request.form['caracter_clase'],
-#                 "contenidos_tematicos": request.form['contenidos_tematicos'],
-#                 "actividades": request.form['actividades'],
-#                 "observaciones": request.form['observaciones']
-#             })
-#             break
-#     guardar_datos()  # Guarda en el archivo Excel después de actualizar
-#     return redirect(url_for('index'))
-
 @app.route('/actualizar/<int:id>', methods=['POST'])
 def actualizar(id):
     for dato in datos:

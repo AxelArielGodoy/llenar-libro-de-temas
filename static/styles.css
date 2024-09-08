@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(
+    to right,
+    #3a7bd597,
+    #4e7b914d
+  ); /* Degradado de azules suaves y grises */
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo general para el contenedor principal */
+.container {
+  max-width: 700px; /* Ajusta el ancho máximo del contenedor principal */
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Estilo para el formulario de agregar */
+.form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+form input,
+form select,
+form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Contenedor de la tabla con mejor visibilidad */
+.table-container {
+  overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px; /* Aumento del relleno para mejor legibilidad */
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px; /* Tamaño de fuente más grande para mejor lectura */
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+  table {
+    font-size: 12px; /* Tamaño de fuente ajustado para móviles */
+  }
+
+  th,
+  td {
+    padding: 8px; /* Ajuste del relleno en pantallas pequeñas */
+  }
+}
+
+/* Ajustes para pantallas más grandes */
+@media (min-width: 601px) {
+  table {
+    font-size: 14px; /* Tamaño de fuente adecuado para pantallas grandes */
+  }
+}
