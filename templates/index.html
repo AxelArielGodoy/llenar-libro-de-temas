@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>CRUD con Flask</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
   </head>
-  <body>
-    <h1>Registro de Clases</h1>
+  <body div class="container">
+    <h1>registro de clases</h1>
 
     <!-- Formulario para crear un nuevo dato -->
     <form action="/crear" method="post">
