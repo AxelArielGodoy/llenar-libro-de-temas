@@ -7,6 +7,7 @@
       type="text/css"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="container">
     <h1>registro de clases</h1>
@@ -79,21 +80,20 @@
           <td>{{ dato.observaciones }}</td>
           <td>
             <!-- Botón para seleccionar un registro para actualización -->
-            <form style="display: block">
-              <button
-                type="button"
-                onclick="showUpdateForm({{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
-              >
-                Actualizar
-              </button>
-            </form>
+            <button
+              class="tabla-btn"
+              type="button"
+              onclick="showUpdateForm({{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
+            >
+              Actualizar
+            </button>
             <!-- Formulario para eliminar datos -->
             <form
               action="/eliminar/{{ dato.id }}"
               method="post"
               style="display: block"
             >
-              <button type="submit">Eliminar</button>
+              <button class="tabla-btn" type="submit">Eliminar</button>
             </form>
           </td>
         </tr>

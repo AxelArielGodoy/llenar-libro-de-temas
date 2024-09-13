@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #9df314; /* Cambia el color aquí */
-  font-family: Arial, sans-serif;
+  font-family: "Calibri", sans-serif;
 }
 
 /* Estilo general para el contenedor principal */
@@ -29,11 +29,13 @@ form input,
 form select,
 form button {
   display: block;
-  width: 88%;
+  width: 100%; /* Asegura que todos tengan el mismo ancho */
+  max-width: 90%; /* Controla el ancho máximo al igual que antes */
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ddd;
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
 
 form button {
@@ -57,36 +59,64 @@ form button:hover {
 }
 
 table {
-  width: 80%;
-  border-collapse: collapse;
+  width: 90%;
+  border-collapse: separate; /* Cambia a 'separate' para permitir bordes redondeados */
+  border-spacing: 0; /* Elimina el espacio entre celdas */
+  border: 1px solid #ddd; /* Borde general de la tabla */
+  border-radius: 8px; /* Bordes redondeados de la tabla */
+  overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
 }
 
-th,
 td {
-  padding: 10px; /* Aumento del relleno para mejor legibilidad */
+  padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px; /* Tamaño de fuente más grande para mejor lectura */
+  border-bottom: 1px solid #ddd; /* Bordes inferiores suaves */
+  font-size: 14px;
 }
 
 th {
   background-color: #3e3e3eec;
   color: white;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-weight: normal; /* Sin negrita */
+  border-top: 1px solid #ddd; /* Borde superior suave */
+  text-align: left;
 }
 
 tr:nth-child(even) {
-  background-color: #d1b7b7;
+  background-color: #f2f2f2; /* Fondo más claro para filas pares */
 }
 
+table,
+th,
+td {
+  border-radius: 8px; /* Bordes redondeados para todas las celdas */
+  border: none; /* Elimina el borde predeterminado */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto más moderno */
+}
 /* Ajustes para dispositivos móviles */
 @media (max-width: 600px) {
   table {
     font-size: 12px; /* Tamaño de fuente ajustado para móviles */
   }
 
+  form input,
+  form select,
+  form button {
+    max-width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */
+    padding: 8px; /* Ajuste de padding para móviles */
+  }
+
   th,
   td {
     padding: 8px; /* Ajuste del relleno en pantallas pequeñas */
+  }
+
+  /* Ajustes para botones en la tabla */
+  .tabla-btn {
+    padding: 4px 8px; /* Ajuste del tamaño de los botones para móviles */
+    font-size: 10px; /* Tamaño de fuente más pequeño para móviles */
   }
 }
 
@@ -95,4 +125,20 @@ tr:nth-child(even) {
   table {
     font-size: 14px; /* Tamaño de fuente adecuado para pantallas grandes */
   }
+}
+
+/* Estilo específico para los botones de la tabla */
+.tabla-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  background-color: #3e3e3eec;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.tabla-btn:hover {
+  background-color: #000000;
 }
