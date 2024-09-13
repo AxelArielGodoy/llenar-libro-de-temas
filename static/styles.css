@@ -7,8 +7,8 @@ body {
 
 /* Estilo general para el contenedor principal */
 .container {
-  width: 80%;
-  max-width: 900px;
+  width: 90%;
+  max-width: 100%;
   margin: 20px auto;
   background-color: #8acd01; /* Fondo verde para el contenido */
   padding: 20px;
@@ -30,7 +30,7 @@ form select,
 form button {
   display: block;
   width: 100%; /* Asegura que todos tengan el mismo ancho */
-  max-width: 90%; /* Controla el ancho máximo al igual que antes */
+  max-width: 100%; /* Controla el ancho máximo al igual que antes */
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
@@ -43,6 +43,7 @@ form button {
   color: white;
   border: none;
   cursor: pointer;
+  font-size: 14px;
 }
 
 form button:hover {
@@ -55,12 +56,13 @@ form button:hover {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  overflow-x: auto;
+  padding: 10px;
 }
 
 table {
-  width: 90%;
-  border-collapse: separate; /* Cambia a 'separate' para permitir bordes redondeados */
+  width: 100%;
+  border-collapse: collapse; /* Mejora la apariencia de la tabla */
   border-spacing: 0; /* Elimina el espacio entre celdas */
   border: 1px solid #ddd; /* Borde general de la tabla */
   border-radius: 8px; /* Bordes redondeados de la tabla */
@@ -129,7 +131,7 @@ td {
 
 /* Estilo específico para los botones de la tabla */
 .tabla-btn {
-  padding: 5px 10px;
+  padding: 6px 12px;
   font-size: 12px;
   border-radius: 4px;
   background-color: #3e3e3eec;
