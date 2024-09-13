@@ -46,8 +46,10 @@ def crear():
     guardar_datos()  # Guarda en el archivo Excel después de agregar
     return redirect(url_for('index'))
 
+# Ruta para actualizar un dato
 @app.route('/actualizar/<int:id>', methods=['POST'])
 def actualizar(id):
+    global datos
     for dato in datos:
         if dato['id'] == id:
             dato.update({
@@ -60,8 +62,8 @@ def actualizar(id):
                 "actividades": request.form.get('actividades', dato.get('actividades', '')),
                 "observaciones": request.form.get('observaciones', dato.get('observaciones', ''))
             })
+            guardar_datos()  # Guarda en el archivo Excel después de actualizar
             break
-    guardar_datos()  # Guarda en el archivo Excel después de actualizar
     return redirect(url_for('index'))
 
 # Ruta para eliminar un dato
@@ -78,4 +80,4 @@ def descargar_excel():
     return send_file(EXCEL_FILE, as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(app.run(host='0.0.0.0'), debug=True)
+    app.run(host='0.0.0.0',debug=True)

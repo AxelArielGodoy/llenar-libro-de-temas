@@ -2,158 +2,172 @@
 <html>
   <head>
     <title>Llenar libro de temas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='styles.css') }}"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="container">
-    <h1>registro de clases</h1>
-
+  <body>
     <!-- Formulario para crear un nuevo dato -->
-    <form action="/crear" method="post">
-      <input type="text" name="dia" placeholder="Día" required />
-      <input type="date" name="fecha" id="fecha" required />
-      <input
-        type="number"
-        name="unidad_numero"
-        placeholder="Unidad N°"
-        required
-      />
-      <select name="curso" required>
-        <option value="M1A">M1A</option>
-        <option value="M1B">M1B</option>
-        <option value="S6A">S6A</option>
-        <option value="TM">TM</option>
-      </select>
-      <select name="caracter_clase" required>
-        <option value="Teórica">Teórica</option>
-        <option value="Práctica">Práctica</option>
-        <option value="Teórico/Práctica">Teórico/Práctica</option>
-        <option value="Explicación">Explicación</option>
-        <option value="Examen">Examen</option>
-      </select>
+    <div class="container">
+      <h1>registro de clases</h1>
+      <form action="/crear" method="post">
+        <input type="text" name="dia" placeholder="Día" required />
+        <input type="date" name="fecha" id="fecha" required />
+        <input
+          type="number"
+          name="unidad_numero"
+          placeholder="Unidad N°"
+          required
+        />
+        <select name="curso" required>
+          <option value="M1A">M1A</option>
+          <option value="M1B">M1B</option>
+          <option value="S6A">S6A</option>
+          <option value="TM">TM</option>
+        </select>
+        <select name="caracter_clase" required>
+          <option value="Teórica">Teórica</option>
+          <option value="Práctica">Práctica</option>
+          <option value="Teórico/Práctica">Teórico/Práctica</option>
+          <option value="Explicación">Explicación</option>
+          <option value="Examen">Examen</option>
+        </select>
+        <input
+          type="text"
+          name="contenidos_tematicos"
+          placeholder="Contenidos Temáticos"
+          required
+        />
+        <input
+          type="text"
+          name="actividades"
+          placeholder="Actividades que se desarrollan"
+          required
+        />
+        <input type="text" name="observaciones" placeholder="Observaciones" />
+        <button type="submit">Agregar</button>
+      </form>
+      <!-- Tabla para mostrar los datos existentes -->
+      <div class="table-wrapper">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Día</th>
+              <th>Fecha</th>
+              <th>Unidad N°</th>
+              <th>Curso</th>
+              <th>Carácter de la Clase</th>
+              <th>Contenidos Temáticos</th>
+              <th>Actividades</th>
+              <th>Observaciones</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for dato in datos %}
+            <tr>
+              <td>{{ dato.id }}</td>
+              <td>{{ dato.dia }}</td>
+              <td>{{ dato.fecha }}</td>
+              <td>{{ dato.unidad_numero }}</td>
+              <td>{{ dato.curso }}</td>
+              <td>{{ dato.caracter_clase }}</td>
+              <td>{{ dato.contenidos_tematicos }}</td>
+              <td>{{ dato.actividades }}</td>
+              <td>{{ dato.observaciones }}</td>
+              <td>
+                <!-- Botón para seleccionar un registro para actualización -->
+                <button
+                  class="tabla-btn"
+                  type="button"
+                  onclick="showUpdateForm(event, {{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
+                >
+                  Actualizar
+                </button>
+                <!-- Formulario para eliminar datos -->
+                <form
+                  action="/eliminar/{{ dato.id }}"
+                  method="post"
+                  style="display: block"
+                >
+                  <button class="tabla-btn" type="submit">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
 
-      <input
-        type="text"
-        name="contenidos_tematicos"
-        placeholder="Contenidos Temáticos"
-        required
-      />
-      <input
-        type="text"
-        name="actividades"
-        placeholder="Actividades que se desarrollan"
-        required
-      />
-      <input type="text" name="observaciones" placeholder="Observaciones" />
-      <button type="submit">Agregar</button>
-    </form>
+      <!-- Formulario para actualizar datos -->
+      <h2>Actualizar Registro</h2>
+      <form id="updateForm" action="#" method="post" style="display: none">
+        <input type="hidden" name="id" id="updateId" />
+        <input
+          type="text"
+          name="dia"
+          id="updateDia"
+          placeholder="Día"
+          required
+        />
+        <input type="date" name="fecha" id="updateFecha" required />
+        <input
+          type="number"
+          name="unidad_numero"
+          id="updateUnidadNumero"
+          placeholder="Unidad N°"
+          required
+        />
+        <select name="curso" id="updateCurso" required>
+          <option value="M1A">M1A</option>
+          <option value="M1B">M1B</option>
+          <option value="S6A">S6A</option>
+          <option value="TM">TM</option>
+        </select>
+        <select
+          name="caracter_clase"
+          id="updateCaracterClase"
+          placeholder="Carácter de la clase"
+          required
+        >
+          <option value="Teórica">Teórica</option>
+          <option value="Práctica">Práctica</option>
+          <option value="Teórico/Práctica">Teórico/Práctica</option>
+          <option value="Explicación">Explicación</option>
+          <option value="Examen">Examen</option>
+        </select>
+        <input
+          type="text"
+          name="contenidos_tematicos"
+          id="updateContenidosTematicos"
+          placeholder="Contenidos Temáticos"
+          required
+        />
+        <input
+          type="text"
+          name="actividades"
+          id="updateActividades"
+          placeholder="Actividades que se desarrollan"
+          required
+        />
+        <input
+          type="text"
+          name="observaciones"
+          id="updateObservaciones"
+          placeholder="Observaciones"
+        />
+        <button type="submit">Guardar Cambios</button>
+      </form>
 
-    <!-- Tabla para mostrar los datos existentes -->
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Día</th>
-          <th>Fecha</th>
-          <th>Unidad N°</th>
-          <th>Curso</th>
-          <th>Carácter de la Clase</th>
-          <th>Contenidos Temáticos</th>
-          <th>Actividades</th>
-          <th>Observaciones</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for dato in datos %}
-        <tr>
-          <td>{{ dato.dia }}</td>
-          <td>{{ dato.fecha }}</td>
-          <td>{{ dato.unidad_numero }}</td>
-          <td>{{ dato.curso }}</td>
-          <td>{{ dato.caracter_clase }}</td>
-          <td>{{ dato.contenidos_tematicos }}</td>
-          <td>{{ dato.actividades }}</td>
-          <td>{{ dato.observaciones }}</td>
-          <td>
-            <!-- Botón para seleccionar un registro para actualización -->
-            <button
-              class="tabla-btn"
-              type="button"
-              onclick="showUpdateForm({{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
-            >
-              Actualizar
-            </button>
-            <!-- Formulario para eliminar datos -->
-            <form
-              action="/eliminar/{{ dato.id }}"
-              method="post"
-              style="display: block"
-            >
-              <button class="tabla-btn" type="submit">Eliminar</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <!-- Formulario para actualizar datos -->
-    <h2>Actualizar Registro</h2>
-    <form id="updateForm" action="#" method="post" style="display: none">
-      <input type="hidden" name="id" id="updateId" />
-      <input type="text" name="dia" id="updateDia" placeholder="Día" required />
-      <input type="date" name="fecha" id="updateFecha" required />
-      <input
-        type="number"
-        name="unidad_numero"
-        id="updateUnidadNumero"
-        placeholder="Unidad N°"
-        required
-      />
-      <select name="curso" id="updateCurso" required>
-        <option value="M1A">M1A</option>
-        <option value="M1B">M1B</option>
-        <option value="S6A">S6A</option>
-        <option value="TM">TM</option>
-      </select>
-      <select name="caracter_clase" id="updateCaracterClase" required>
-        <option value="Teórica">Teórica</option>
-        <option value="Práctica">Práctica</option>
-        <option value="Teórico/Práctica">Teórico/Práctica</option>
-        <option value="Explicación">Explicación</option>
-        <option value="Examen">Examen</option>
-      </select>
-      <input
-        type="text"
-        name="contenidos_tematicos"
-        id="updateContenidosTematicos"
-        placeholder="Contenidos Temáticos"
-        required
-      />
-      <input
-        type="text"
-        name="actividades"
-        id="updateActividades"
-        placeholder="Actividades que se desarrollan"
-        required
-      />
-      <input
-        type="text"
-        name="observaciones"
-        id="updateObservaciones"
-        placeholder="Observaciones"
-      />
-      <button type="submit">Guardar Cambios</button>
-    </form>
-
-    <!-- Botón para descargar el archivo Excel -->
-    <button onclick="window.location.href='/descargar_excel'">
-      Descargar Excel
-    </button>
+      <!-- Botón para descargar el archivo Excel -->
+      <button onclick="window.location.href='/descargar_excel'">
+        Descargar Excel
+      </button>
+    </div>
 
     <!-- Script para establecer la fecha actual por defecto, considerando la zona horaria GMT-3 -->
     <script>
@@ -168,6 +182,7 @@
 
       // Función para mostrar el formulario de actualización con datos prellenados
       function showUpdateForm(
+        event,
         id,
         dia,
         fecha,

@@ -3,6 +3,7 @@ body {
   padding: 0;
   background-color: #9df314; /* Cambia el color aquí */
   font-family: "Calibri", sans-serif;
+  overflow-x: hidden; /* Evita el desplazamiento horizontal en la página principal */
 }
 
 /* Estilo general para el contenedor principal */
@@ -14,6 +15,7 @@ body {
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del contenedor */
   border-radius: 8px;
+  box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
 }
 
 /* Estilo para el formulario de agregar */
@@ -51,31 +53,37 @@ form button:hover {
 }
 
 /* Contenedor de la tabla con mejor visibilidad */
-.table-container {
+.table-wrapper {
   overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
-  padding: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 100%; /* Asegura que no se sobrepase el ancho de la pantalla */
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
 }
 
+/* Asegura que la tabla sea ancha y se pueda desplazar horizontalmente */
 table {
   width: 100%;
-  border-collapse: collapse; /* Mejora la apariencia de la tabla */
+  min-width: 600px; /* Establece un ancho mínimo para la tabla */
+  border-collapse: separate; /* Mejora la apariencia de la tabla */
   border-spacing: 0; /* Elimina el espacio entre celdas */
   border: 1px solid #ddd; /* Borde general de la tabla */
   border-radius: 8px; /* Bordes redondeados de la tabla */
   overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
 }
 
-td {
+td,
+th {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd; /* Bordes inferiores suaves */
   font-size: 14px;
 }
 
+/* Ajustes específicos para el encabezado de la tabla */
 th {
   background-color: #3e3e3eec;
   color: white;
@@ -97,6 +105,7 @@ td {
   border: none; /* Elimina el borde predeterminado */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave para un efecto más moderno */
 }
+
 /* Ajustes para dispositivos móviles */
 @media (max-width: 600px) {
   table {
