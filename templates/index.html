@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CRUD con Flask</title>
+    <title>Llenar libro de temas</title>
     <link
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='styles.css') }}"
     />
   </head>
-  <body div class="container">
+  <body class="container">
     <h1>registro de clases</h1>
 
     <!-- Formulario para crear un nuevo dato -->
     <form action="/crear" method="post">
       <input type="text" name="dia" placeholder="Día" required />
       <input type="date" name="fecha" id="fecha" required />
-      <input type="text" name="mes" placeholder="Mes" required />
       <input
         type="number"
         name="unidad_numero"
         placeholder="Unidad N°"
         required
       />
-      <input
-        type="number"
-        name="clase_numero"
-        placeholder="Clase N°"
-        required
-      />
       <select name="curso" required>
-        <option value="6a">6a</option>
-        <option value="5b">5b</option>
+        <option value="M1A">M1A</option>
+        <option value="M1B">M1B</option>
+        <option value="S6A">S6A</option>
+        <option value="TM">TM</option>
       </select>
-      <input
-        type="text"
-        name="caracter_clase"
-        placeholder="Carácter de la clase"
-        required
-      />
+      <select name="caracter_clase" required>
+        <option value="Teórica">Teórica</option>
+        <option value="Práctica">Práctica</option>
+        <option value="Teórico/Práctica">Teórico/Práctica</option>
+        <option value="Explicación">Explicación</option>
+        <option value="Examen">Examen</option>
+      </select>
+
       <input
         type="text"
         name="contenidos_tematicos"
@@ -58,12 +55,9 @@
     <table border="1">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Día</th>
           <th>Fecha</th>
-          <th>Mes</th>
           <th>Unidad N°</th>
-          <th>Clase N°</th>
           <th>Curso</th>
           <th>Carácter de la Clase</th>
           <th>Contenidos Temáticos</th>
@@ -75,12 +69,9 @@
       <tbody>
         {% for dato in datos %}
         <tr>
-          <td>{{ dato.id }}</td>
           <td>{{ dato.dia }}</td>
           <td>{{ dato.fecha }}</td>
-          <td>{{ dato.mes }}</td>
           <td>{{ dato.unidad_numero }}</td>
-          <td>{{ dato.clase_numero }}</td>
           <td>{{ dato.curso }}</td>
           <td>{{ dato.caracter_clase }}</td>
           <td>{{ dato.contenidos_tematicos }}</td>
@@ -88,17 +79,19 @@
           <td>{{ dato.observaciones }}</td>
           <td>
             <!-- Botón para seleccionar un registro para actualización -->
-            <button
-              type="button"
-              onclick="showUpdateForm({{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.mes }}', '{{ dato.unidad_numero }}', '{{ dato.clase_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
-            >
-              Actualizar
-            </button>
+            <form style="display: block">
+              <button
+                type="button"
+                onclick="showUpdateForm({{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
+              >
+                Actualizar
+              </button>
+            </form>
             <!-- Formulario para eliminar datos -->
             <form
               action="/eliminar/{{ dato.id }}"
               method="post"
-              style="display: inline-block"
+              style="display: block"
             >
               <button type="submit">Eliminar</button>
             </form>
@@ -114,7 +107,6 @@
       <input type="hidden" name="id" id="updateId" />
       <input type="text" name="dia" id="updateDia" placeholder="Día" required />
       <input type="date" name="fecha" id="updateFecha" required />
-      <input type="text" name="mes" id="updateMes" placeholder="Mes" required />
       <input
         type="number"
         name="unidad_numero"
@@ -122,24 +114,19 @@
         placeholder="Unidad N°"
         required
       />
-      <input
-        type="number"
-        name="clase_numero"
-        id="updateClaseNumero"
-        placeholder="Clase N°"
-        required
-      />
       <select name="curso" id="updateCurso" required>
-        <option value="6a">6a</option>
-        <option value="5b">5b</option>
+        <option value="M1A">M1A</option>
+        <option value="M1B">M1B</option>
+        <option value="S6A">S6A</option>
+        <option value="TM">TM</option>
       </select>
-      <input
-        type="text"
-        name="caracter_clase"
-        id="updateCaracterClase"
-        placeholder="Carácter de la clase"
-        required
-      />
+      <select name="caracter_clase" id="updateCaracterClase" required>
+        <option value="Teórica">Teórica</option>
+        <option value="Práctica">Práctica</option>
+        <option value="Teórico/Práctica">Teórico/Práctica</option>
+        <option value="Explicación">Explicación</option>
+        <option value="Examen">Examen</option>
+      </select>
       <input
         type="text"
         name="contenidos_tematicos"
@@ -184,9 +171,7 @@
         id,
         dia,
         fecha,
-        mes,
         unidad_numero,
-        clase_numero,
         curso,
         caracter_clase,
         contenidos_tematicos,
@@ -198,9 +183,7 @@
         document.getElementById("updateId").value = id;
         document.getElementById("updateDia").value = dia;
         document.getElementById("updateFecha").value = fecha;
-        document.getElementById("updateMes").value = mes;
         document.getElementById("updateUnidadNumero").value = unidad_numero;
-        document.getElementById("updateClaseNumero").value = clase_numero;
         document.getElementById("updateCurso").value = curso;
         document.getElementById("updateCaracterClase").value = caracter_clase;
         document.getElementById("updateContenidosTematicos").value =

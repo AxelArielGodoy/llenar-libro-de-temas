@@ -1,0 +1,5 @@
+dia = es dia de la semana automatico o que se modifique si se modifica la fecha general
+mes = afuera
+clase n = afuera
+cursos = M1A, M1B,S6A,TM
+carácter de la clase =menú desplegable(teorica, practica, teorico/practica, explicación, examen)
