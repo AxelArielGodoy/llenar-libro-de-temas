@@ -80,22 +80,25 @@
               <td>{{ dato.actividades }}</td>
               <td>{{ dato.observaciones }}</td>
               <td>
-                <!-- Botón para seleccionar un registro para actualización -->
-                <button
-                  class="tabla-btn"
-                  type="button"
-                  onclick="showUpdateForm(event, {{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
-                >
-                  Actualizar
-                </button>
-                <!-- Formulario para eliminar datos -->
-                <form
-                  action="/eliminar/{{ dato.id }}"
-                  method="post"
-                  style="display: block"
-                >
-                  <button class="tabla-btn" type="submit">Eliminar</button>
-                </form>
+                <!-- Contenedor para los botones -->
+                <div style="display: flex; gap: 10px">
+                  <!-- Botón para seleccionar un registro para actualización -->
+                  <button
+                    class="tabla-btn"
+                    type="button"
+                    onclick="showUpdateForm(event, {{ dato.id }}, '{{ dato.dia }}', '{{ dato.fecha }}', '{{ dato.unidad_numero }}', '{{ dato.curso }}', '{{ dato.caracter_clase }}', '{{ dato.contenidos_tematicos }}', '{{ dato.actividades }}', '{{ dato.observaciones }}')"
+                  >
+                    Actualizar
+                  </button>
+                  <!-- Formulario para eliminar datos -->
+                  <form
+                    action="/eliminar/{{ dato.id }}"
+                    method="post"
+                    style="display: block"
+                  >
+                    <button class="tabla-btn" type="submit">Eliminar</button>
+                  </form>
+                </div>
               </td>
             </tr>
             {% endfor %}

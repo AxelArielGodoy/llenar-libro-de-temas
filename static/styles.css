@@ -3,16 +3,17 @@ body {
   padding: 0;
   background-color: #9df314; /* Cambia el color aquí */
   font-family: "Calibri", sans-serif;
-  overflow-x: hidden; /* Evita el desplazamiento horizontal en la página principal */
+  overflow-x: hidden;
+  width: 100%; /* Evita el desplazamiento horizontal en la página principal */
 }
 
 /* Estilo general para el contenedor principal */
 .container {
-  width: 90%;
+  width: 95%;
   max-width: 100%;
-  margin: 20px auto;
+  margin: 5px auto;
   background-color: #8acd01; /* Fondo verde para el contenido */
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del contenedor */
   border-radius: 8px;
   box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho */
@@ -117,6 +118,7 @@ td {
   form button {
     max-width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */
     padding: 8px; /* Ajuste de padding para móviles */
+    height: 50px;
   }
 
   th,
